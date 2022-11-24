@@ -1,0 +1,953 @@
+{
+	"info": {
+		"_postman_id": "dd48ca55-e614-442b-936b-1e77ddbba0e4",
+		"name": "Manual_tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "API - Authorization",
+			"item": [
+				{
+					"name": "Authorization - ok",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/auth",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API - GET Bank",
+			"item": [
+				{
+					"name": "Bank with authorization - ok",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// --------- Variables -------------- //\r",
+									"const base_url = pm.variables.get('base_url')\r",
+									"\r",
+									"// --------- Authentication Script -------------- //\r",
+									"var auth_get_request = {\r",
+									"    url: `${base_url}/auth`,\r",
+									"    method: \"GET\"\r",
+									"}\r",
+									"\r",
+									"pm.sendRequest(auth_get_request, (err, resp) => {\r",
+									"\r",
+									"    console.log(err ? err : resp.json())\r",
+									"    if (err === null) {\r",
+									"\r",
+									"        var responseJson = resp.json()\r",
+									"        pm.collectionVariables.set('access_token', responseJson.token)\r",
+									"    }\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/bank",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"bank"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bank without authorization - not ok",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/bank",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"bank"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bank by estadoAtuacao=SC - ok",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// --------- Variables -------------- //\r",
+									"const base_url = pm.variables.get('base_url')\r",
+									"\r",
+									"// --------- Authentication Script -------------- //\r",
+									"var auth_get_request = {\r",
+									"    url: `${base_url}/auth`,\r",
+									"    method: \"GET\"\r",
+									"}\r",
+									"\r",
+									"pm.sendRequest(auth_get_request, (err, resp) => {\r",
+									"\r",
+									"    console.log(err ? err : resp.json())\r",
+									"    if (err === null) {\r",
+									"\r",
+									"        var responseJson = resp.json()\r",
+									"        pm.collectionVariables.set('access_token', responseJson.token)\r",
+									"    }\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/bank?estadoAtuacao=SC",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"bank"
+							],
+							"query": [
+								{
+									"key": "estadoAtuacao",
+									"value": "SC"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bank by estadoAtuacao=PR - not ok",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// --------- Variables -------------- //\r",
+									"const base_url = pm.variables.get('base_url')\r",
+									"\r",
+									"// --------- Authentication Script -------------- //\r",
+									"var auth_get_request = {\r",
+									"    url: `${base_url}/auth`,\r",
+									"    method: \"GET\"\r",
+									"}\r",
+									"\r",
+									"pm.sendRequest(auth_get_request, (err, resp) => {\r",
+									"\r",
+									"    console.log(err ? err : resp.json())\r",
+									"    if (err === null) {\r",
+									"\r",
+									"        var responseJson = resp.json()\r",
+									"        pm.collectionVariables.set('access_token', responseJson.token)\r",
+									"    }\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/bank?estadoAtuacao=PR",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"bank"
+							],
+							"query": [
+								{
+									"key": "estadoAtuacao",
+									"value": "PR"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bank by id - not ok",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// --------- Variables -------------- //\r",
+									"const base_url = pm.variables.get('base_url')\r",
+									"\r",
+									"// --------- Authentication Script -------------- //\r",
+									"var auth_get_request = {\r",
+									"    url: `${base_url}/auth`,\r",
+									"    method: \"GET\"\r",
+									"}\r",
+									"\r",
+									"pm.sendRequest(auth_get_request, (err, resp) => {\r",
+									"\r",
+									"    console.log(err ? err : resp.json())\r",
+									"    if (err === null) {\r",
+									"\r",
+									"        var responseJson = resp.json()\r",
+									"        pm.collectionVariables.set('access_token', responseJson.token)\r",
+									"    }\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/bank?id=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"bank"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bank by name - not ok",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// --------- Variables -------------- //\r",
+									"const base_url = pm.variables.get('base_url')\r",
+									"\r",
+									"// --------- Authentication Script -------------- //\r",
+									"var auth_get_request = {\r",
+									"    url: `${base_url}/auth`,\r",
+									"    method: \"GET\"\r",
+									"}\r",
+									"\r",
+									"pm.sendRequest(auth_get_request, (err, resp) => {\r",
+									"\r",
+									"    console.log(err ? err : resp.json())\r",
+									"    if (err === null) {\r",
+									"\r",
+									"        var responseJson = resp.json()\r",
+									"        pm.collectionVariables.set('access_token', responseJson.token)\r",
+									"    }\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/bank?banco=Nubank",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"bank"
+							],
+							"query": [
+								{
+									"key": "banco",
+									"value": "Nubank"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bank by tax - not ok",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// --------- Variables -------------- //\r",
+									"const base_url = pm.variables.get('base_url')\r",
+									"\r",
+									"// --------- Authentication Script -------------- //\r",
+									"var auth_get_request = {\r",
+									"    url: `${base_url}/auth`,\r",
+									"    method: \"GET\"\r",
+									"}\r",
+									"\r",
+									"pm.sendRequest(auth_get_request, (err, resp) => {\r",
+									"\r",
+									"    console.log(err ? err : resp.json())\r",
+									"    if (err === null) {\r",
+									"\r",
+									"        var responseJson = resp.json()\r",
+									"        pm.collectionVariables.set('access_token', responseJson.token)\r",
+									"    }\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/bank?juros=10.75",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"bank"
+							],
+							"query": [
+								{
+									"key": "juros",
+									"value": "10.75"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API - PUT Bank",
+			"item": [
+				{
+					"name": "Bank with id=1 - ok",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// --------- Variables -------------- //\r",
+									"const base_url = pm.variables.get('base_url')\r",
+									"\r",
+									"// --------- Authentication Script -------------- //\r",
+									"var auth_get_request = {\r",
+									"    url: `${base_url}/auth`,\r",
+									"    method: \"GET\"\r",
+									"}\r",
+									"\r",
+									"pm.sendRequest(auth_get_request, (err, resp) => {\r",
+									"\r",
+									"    console.log(err ? err : resp.json())\r",
+									"    if (err === null) {\r",
+									"\r",
+									"        var responseJson = resp.json()\r",
+									"        pm.collectionVariables.set('access_token', responseJson.token)\r",
+									"    }\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"estadoAtuacao\": \"SP\",\r\n    \"juros\": \"15,00%\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/bank/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"bank",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bank with id=1 and different body - not ok",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// --------- Variables -------------- //\r",
+									"const base_url = pm.variables.get('base_url')\r",
+									"\r",
+									"// --------- Authentication Script -------------- //\r",
+									"var auth_get_request = {\r",
+									"    url: `${base_url}/auth`,\r",
+									"    method: \"GET\"\r",
+									"}\r",
+									"\r",
+									"pm.sendRequest(auth_get_request, (err, resp) => {\r",
+									"\r",
+									"    console.log(err ? err : resp.json())\r",
+									"    if (err === null) {\r",
+									"\r",
+									"        var responseJson = resp.json()\r",
+									"        pm.collectionVariables.set('access_token', responseJson.token)\r",
+									"    }\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"estadoAtuacao\": \"MG\",\r\n    \"juros\": \"10,00%\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/bank/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"bank",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bank with id=2 - not ok",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// --------- Variables -------------- //\r",
+									"const base_url = pm.variables.get('base_url')\r",
+									"\r",
+									"// --------- Authentication Script -------------- //\r",
+									"var auth_get_request = {\r",
+									"    url: `${base_url}/auth`,\r",
+									"    method: \"GET\"\r",
+									"}\r",
+									"\r",
+									"pm.sendRequest(auth_get_request, (err, resp) => {\r",
+									"\r",
+									"    console.log(err ? err : resp.json())\r",
+									"    if (err === null) {\r",
+									"\r",
+									"        var responseJson = resp.json()\r",
+									"        pm.collectionVariables.set('access_token', responseJson.token)\r",
+									"    }\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"estadoAtuacao\": \"MG\",\r\n    \"juros\": \"10,00%\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/bank/2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"bank",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bank without body -  not ok",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// --------- Variables -------------- //\r",
+									"const base_url = pm.variables.get('base_url')\r",
+									"\r",
+									"// --------- Authentication Script -------------- //\r",
+									"var auth_get_request = {\r",
+									"    url: `${base_url}/auth`,\r",
+									"    method: \"GET\"\r",
+									"}\r",
+									"\r",
+									"pm.sendRequest(auth_get_request, (err, resp) => {\r",
+									"\r",
+									"    console.log(err ? err : resp.json())\r",
+									"    if (err === null) {\r",
+									"\r",
+									"        var responseJson = resp.json()\r",
+									"        pm.collectionVariables.set('access_token', responseJson.token)\r",
+									"    }\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/bank/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"bank",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bank without authorization -  not ok",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"estadoAtuacao\": \"SP\",\r\n    \"juros\": \"15,00%\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/bank/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"bank",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API - POST Bank",
+			"item": [
+				{
+					"name": "Bank - ok",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// --------- Variables -------------- //\r",
+									"const base_url = pm.variables.get('base_url')\r",
+									"\r",
+									"// --------- Authentication Script -------------- //\r",
+									"var auth_get_request = {\r",
+									"    url: `${base_url}/auth`,\r",
+									"    method: \"GET\"\r",
+									"}\r",
+									"\r",
+									"pm.sendRequest(auth_get_request, (err, resp) => {\r",
+									"\r",
+									"    console.log(err ? err : resp.json())\r",
+									"    if (err === null) {\r",
+									"\r",
+									"        var responseJson = resp.json()\r",
+									"        pm.collectionVariables.set('access_token', responseJson.token)\r",
+									"    }\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"banco\": \"Banco Teste\",\r\n    \"estadoAtuacao\": \"SC\",\r\n    \"juros\": \"10,00%\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/bank",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"bank"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Different bank - not ok",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// --------- Variables -------------- //\r",
+									"const base_url = pm.variables.get('base_url')\r",
+									"\r",
+									"// --------- Authentication Script -------------- //\r",
+									"var auth_get_request = {\r",
+									"    url: `${base_url}/auth`,\r",
+									"    method: \"GET\"\r",
+									"}\r",
+									"\r",
+									"pm.sendRequest(auth_get_request, (err, resp) => {\r",
+									"\r",
+									"    console.log(err ? err : resp.json())\r",
+									"    if (err === null) {\r",
+									"\r",
+									"        var responseJson = resp.json()\r",
+									"        pm.collectionVariables.set('access_token', responseJson.token)\r",
+									"    }\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"banco\": \"Banco do Brasil Teste\",\r\n    \"estadoAtuacao\": \"SP\",\r\n    \"juros\": \"15,00%\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/bank",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"bank"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bank without body - not ok",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// --------- Variables -------------- //\r",
+									"const base_url = pm.variables.get('base_url')\r",
+									"\r",
+									"// --------- Authentication Script -------------- //\r",
+									"var auth_get_request = {\r",
+									"    url: `${base_url}/auth`,\r",
+									"    method: \"GET\"\r",
+									"}\r",
+									"\r",
+									"pm.sendRequest(auth_get_request, (err, resp) => {\r",
+									"\r",
+									"    console.log(err ? err : resp.json())\r",
+									"    if (err === null) {\r",
+									"\r",
+									"        var responseJson = resp.json()\r",
+									"        pm.collectionVariables.set('access_token', responseJson.token)\r",
+									"    }\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/bank",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"bank"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bank without authorization - not ok",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"banco\": \"Banco Teste\",\r\n    \"estadoAtuacao\": \"SC\",\r\n    \"juros\": \"10,00%\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/bank",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"bank"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://8dac9f4e-fcb2-4e8f-857a-e4ed3497a0d8.mock.pstmn.io",
+			"type": "default"
+		},
+		{
+			"key": "access_token",
+			"value": "",
+			"type": "default"
+		}
+	]
+}

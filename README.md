@@ -4,6 +4,7 @@
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![cypress](https://img.shields.io/badge/-cypress-%23E5E5E5?style=for-the-badge&logo=cypress&logoColor=058a5e)
 ![Mocha](https://img.shields.io/badge/-mochawesome-%238D6748?style=for-the-badge&logo=mocha&logoColor=white)
+![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
 
 
 • **NodeJS** *(Ambiente de execução Javascript)*
@@ -15,8 +16,30 @@
 • **Cypress** *(Framework de teste)*
 <br/>
 • **Mochawesome** *(Reporter personalizado para estrutura de testes Javascript)*
+<br/>
+• **Postman** *(Framework de teste)*
 
-## Pre requisitos
+## Testes de API manuais - Postman
+
+Para a realização dos teste manuais de API, foi utilizada a ferramenta Postman.
+
+A Collection desenvolvida se encontra no diretório: 
+```
+challenge_QA_api/postman-collection
+```
+Esta possui cenários de testes de sucesso e falha, sinalizando alguns bugs encontrados.
+
+### Execução
+
+Para executar os testes, é necessário importar a Collection no Postman e executar as requisições desejadas.
+
+## Testes de API automatizados - Cypress
+
+Para a realização dos teste automatizados, foi utilizada a ferramenta Cypress.
+
+No desenvolvimento, foram selecionados alguns cenários de sucesso e de falha como exemplo.
+
+### Pre requisitos
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
 
@@ -24,7 +47,7 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 
 • [Node.js](https://nodejs.org/en/)
 
-## Clone para Execução
+### Clone para Execução
 
 Clone este repositório para sua máquina local usando comando abaixo:
 

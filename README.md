@@ -55,7 +55,7 @@ Clone este repositório para sua máquina local usando comando abaixo:
 $ git clone https://github.com/JhenniferJS/challenge_QA_api.git
 ```
 
-### Execução na interface
+### Intalação de dependências
 
 Acessar a raiz do repositório
 ```
@@ -67,6 +67,8 @@ Execute comando para instalar as dependências
 npm install
 ```
 
+### Execução na interface
+
 Execute comando para abrir a UI do Cypress
 ```
 npm run cy:open
@@ -74,13 +76,18 @@ npm run cy:open
 
 Na UI do Cypress, clicar na opção `tests.spec.js`
 
-### Gerar relatório Mochawesome
+### Execução em modo headless
 
-Execute comando para executar os testes em modo Headless
+Execute comando para executar os testes em modo headless
 ```
 npm run cy:run
 ```
-Acessar o relatório HTML no diretório
+
+### Gerar relatório Mochawesome
+
+O relatório HTML é gerado quando os testes são executados em modo headless
+
+É possível acessá-lo pelo diretório
 
 ```
 challenge_QA_api/mochawesome-report/mochawesome.html

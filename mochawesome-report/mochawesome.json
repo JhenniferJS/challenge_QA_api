@@ -1,0 +1,292 @@
+{
+  "stats": {
+    "suites": 3,
+    "tests": 8,
+    "passes": 4,
+    "pending": 0,
+    "failures": 4,
+    "start": "2022-11-24T14:29:34.331Z",
+    "end": "2022-11-24T14:29:43.088Z",
+    "duration": 8757,
+    "testsRegistered": 8,
+    "passPercent": 50,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "17d500ba-2ad5-47ea-8737-e74a6a21b6fc",
+      "title": "",
+      "fullFile": "cypress/integration/tests.spec.js",
+      "file": "cypress/integration/tests.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "0bf2c36f-a255-444c-bee6-cad539e75230",
+          "title": "GET request",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "GET request with valid token",
+              "fullTitle": "GET request GET request with valid token",
+              "timedOut": null,
+              "duration": 1761,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.requestGET(Cypress.env('TOKEN')).then(resp => {\n  expect(resp.status).to.be.equal(200);\n  expect(resp.body).not.null;\n  resp.body.forEach(bank => {\n    expect(bank.id).not.null;\n    expect(bank.banco).not.null;\n    expect(bank.estadoAtuacao).not.null;\n    expect(bank.juros).not.null;\n  });\n});",
+              "err": {},
+              "uuid": "6e63b3aa-2127-4111-aebf-e5e2bb9e08fd",
+              "parentUUID": "0bf2c36f-a255-444c-bee6-cad539e75230",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "GET request without token",
+              "fullTitle": "GET request GET request without token",
+              "timedOut": null,
+              "duration": 998,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.requestGET().then(resp => {\n  expect(resp.status).to.be.equal(401);\n});",
+              "err": {
+                "message": "AssertionError: expected 200 to equal 401",
+                "estack": "AssertionError: expected 200 to equal 401\n    at Context.eval (https://8dac9f4e-fcb2-4e8f-857a-e4ed3497a0d8.mock.pstmn.io/__cypress/tests?p=cypress\\integration\\tests.spec.js:166:33)",
+                "diff": "- 200\n+ 401\n"
+              },
+              "uuid": "9ae5de55-57e3-4c32-bb41-b33091cf3ff7",
+              "parentUUID": "0bf2c36f-a255-444c-bee6-cad539e75230",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "GET request with valid estadoAtuacao - SC",
+              "fullTitle": "GET request GET request with valid estadoAtuacao - SC",
+              "timedOut": null,
+              "duration": 1219,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.requestGETWithQueryParameter(Cypress.env('TOKEN'), 'estadoAtuacao', state).then(resp => {\n  expect(resp.status).to.be.equal(200);\n  resp.body.forEach(bank => {\n    expect(bank.estadoAtuacao).to.be.equal(state);\n  });\n});",
+              "err": {},
+              "uuid": "6540ab01-baff-4df7-b75e-c8d1460194b7",
+              "parentUUID": "0bf2c36f-a255-444c-bee6-cad539e75230",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "GET request with valid estadoAtuacao - PR",
+              "fullTitle": "GET request GET request with valid estadoAtuacao - PR",
+              "timedOut": null,
+              "duration": 890,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.requestGETWithQueryParameter(Cypress.env('TOKEN'), 'estadoAtuacao', state).then(resp => {\n  expect(resp.status).to.be.equal(200);\n  resp.body.forEach(bank => {\n    expect(bank.estadoAtuacao).to.be.equal(state);\n  });\n});",
+              "err": {
+                "message": "AssertionError: expected 'SC' to equal 'PR'",
+                "estack": "AssertionError: expected 'SC' to equal 'PR'\n    at eval (https://8dac9f4e-fcb2-4e8f-857a-e4ed3497a0d8.mock.pstmn.io/__cypress/tests?p=cypress\\integration\\tests.spec.js:174:44)\n    at Context.eval (https://8dac9f4e-fcb2-4e8f-857a-e4ed3497a0d8.mock.pstmn.io/__cypress/tests?p=cypress\\integration\\tests.spec.js:173:19)",
+                "diff": "- 'SC'\n+ 'PR'\n"
+              },
+              "uuid": "ebd74529-a71f-4ca6-9417-7f08663fd813",
+              "parentUUID": "0bf2c36f-a255-444c-bee6-cad539e75230",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "6e63b3aa-2127-4111-aebf-e5e2bb9e08fd",
+            "6540ab01-baff-4df7-b75e-c8d1460194b7"
+          ],
+          "failures": [
+            "9ae5de55-57e3-4c32-bb41-b33091cf3ff7",
+            "ebd74529-a71f-4ca6-9417-7f08663fd813"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 4868,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "cb75a46b-0480-4421-9543-53025eda86bb",
+          "title": "PUT request",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "PUT request with valid data and id = 1",
+              "fullTitle": "PUT request PUT request with valid data and id = 1",
+              "timedOut": null,
+              "duration": 760,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.requestPUT(Cypress.env('TOKEN'), bank).then(resp => {\n  expect(resp.status).to.be.equal(200);\n  expect(resp.body[0].mensagem).to.be.equal(bank.message);\n  expect(resp.body[1].id).to.be.equal(Number(bank.id));\n  expect(resp.body[1].banco).to.be.equal(bank.name);\n  expect(resp.body[1].estadoAtuacao).to.be.equal(bank.actingState);\n  expect(resp.body[1].juros).to.be.equal(bank.tax);\n});",
+              "err": {},
+              "uuid": "ac26a146-1904-43f2-9a6d-643302ec99f4",
+              "parentUUID": "cb75a46b-0480-4421-9543-53025eda86bb",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "PUT request with valid data and id = 2",
+              "fullTitle": "PUT request PUT request with valid data and id = 2",
+              "timedOut": null,
+              "duration": 988,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.requestPUT(Cypress.env('TOKEN'), bank).then(resp => {\n  expect(resp.status).to.be.equal(200);\n  expect(resp.body[0].mensagem).to.be.equal(bank.message);\n  expect(resp.body[1].id).to.be.equal(Number(bank.id));\n  expect(resp.body[1].banco).to.be.equal(bank.name);\n  expect(resp.body[1].estadoAtuacao).to.be.equal(bank.actingState);\n  expect(resp.body[1].juros).to.be.equal(bank.tax);\n});",
+              "err": {
+                "message": "AssertionError: expected 1 to equal 2",
+                "estack": "AssertionError: expected 1 to equal 2\n    at Context.eval (https://8dac9f4e-fcb2-4e8f-857a-e4ed3497a0d8.mock.pstmn.io/__cypress/tests?p=cypress\\integration\\tests.spec.js:186:39)",
+                "diff": "- 1\n+ 2\n"
+              },
+              "uuid": "1afae86e-7a19-4382-a516-3b1a8bee36e7",
+              "parentUUID": "cb75a46b-0480-4421-9543-53025eda86bb",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "ac26a146-1904-43f2-9a6d-643302ec99f4"
+          ],
+          "failures": [
+            "1afae86e-7a19-4382-a516-3b1a8bee36e7"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 1748,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "1bb6f49b-0eb8-44f4-b536-10840002452e",
+          "title": "POST request",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "POST request with valid data - Banco Teste",
+              "fullTitle": "POST request POST request with valid data - Banco Teste",
+              "timedOut": null,
+              "duration": 1010,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.requestPOST(Cypress.env('TOKEN'), bank).then(resp => {\n  expect(resp.status).to.be.equal(201);\n  expect(resp.body[0].banco).to.be.equal(bank.name);\n  expect(resp.body[0].estadoAtuacao).to.be.equal(bank.actingState);\n  expect(resp.body[0].juros).to.be.equal(bank.tax);\n  expect(resp.body[1].mensagem).to.be.equal(bank.message);\n});",
+              "err": {},
+              "uuid": "46e8ac84-3fca-496c-a6c7-38759ca6a522",
+              "parentUUID": "1bb6f49b-0eb8-44f4-b536-10840002452e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "POST request with valid data - Banco Teste 2",
+              "fullTitle": "POST request POST request with valid data - Banco Teste 2",
+              "timedOut": null,
+              "duration": 887,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.requestPOST(Cypress.env('TOKEN'), bank).then(resp => {\n  expect(resp.status).to.be.equal(201);\n  expect(resp.body[0].banco).to.be.equal(bank.name);\n  expect(resp.body[0].estadoAtuacao).to.be.equal(bank.actingState);\n  expect(resp.body[0].juros).to.be.equal(bank.tax);\n  expect(resp.body[1].mensagem).to.be.equal(bank.message);\n});",
+              "err": {
+                "message": "AssertionError: expected 'Banco Teste' to equal 'Banco Teste 2'",
+                "estack": "AssertionError: expected 'Banco Teste' to equal 'Banco Teste 2'\n    at Context.eval (https://8dac9f4e-fcb2-4e8f-857a-e4ed3497a0d8.mock.pstmn.io/__cypress/tests?p=cypress\\integration\\tests.spec.js:199:42)",
+                "diff": "- 'Banco Teste'\n+ 'Banco Teste 2'\n"
+              },
+              "uuid": "0b6bbd87-df25-4953-8f43-037e63b1f875",
+              "parentUUID": "1bb6f49b-0eb8-44f4-b536-10840002452e",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "46e8ac84-3fca-496c-a6c7-38759ca6a522"
+          ],
+          "failures": [
+            "0b6bbd87-df25-4953-8f43-037e63b1f875"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 1897,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.2.0"
+    }
+  }
+}
